@@ -1,0 +1,29 @@
+<div class="page-wrapper">
+
+  <div class="content-container">
+
+    <h2>Clerk Management</h2>
+    <hr>
+    <h3>All Clerks</h3>
+
+    <table *ngIf="clerks.length > 0">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <!-- <th>Manager ID</th> -->
+      </tr>
+
+      <tr *ngFor="let clerk of clerks">
+        <td>{{ clerk.id }}</td>
+        <td>{{ clerk.name }}</td>
+        <!-- <td>{{ clerk.manager?.id }}</td> -->
+      </tr>
+    </table>
+
+    <p *ngIf="clerks.length === 0">
+      No clerks found.
+    </p>
+
+  </div>
+
+</div>

@@ -1,0 +1,8 @@
+export interface PendingTransactionDTO {
+  transactionId: number;
+  amount: number;
+  date: string; // use string because LocalDateTime will come as ISO string from backend
+  status: 'PENDING' | 'APPROVED' | 'REJECTED'; // match your TransactionStatus enum
+  transactionType: 'DEPOSIT' | 'WITHDRAW' | 'TRANSFER'; // match your TransactionType enum
+  accountId: number;
+}

@@ -1,0 +1,45 @@
+<div class="login-container">
+  <header>
+    <h1>BankApp</h1>
+  </header>
+
+  <section class="login-box">
+    <h2>Welcome Back!</h2>
+    <p>Please enter your credentials to login.</p>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        placeholder="Enter your username"
+        [(ngModel)]="username"
+        name="username"
+        required
+        #usernameField="ngModel"
+      />
+      <div class="validation-error" *ngIf="usernameField.invalid && usernameField.touched">
+        Username is required.
+      </div>
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        #passwordField="ngModel"
+      />
+      <div class="validation-error" *ngIf="passwordField.invalid && passwordField.touched">
+        Password is required.
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+    <!-- Display general error message -->
+    <p class="error-message" *ngIf="error">{{ error }}</p>
+  </section>
+</div>

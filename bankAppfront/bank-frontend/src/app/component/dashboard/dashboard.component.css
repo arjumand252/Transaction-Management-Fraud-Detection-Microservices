@@ -1,0 +1,135 @@
+/* Container */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+    background: linear-gradient(175deg, #0a0908, #49111c);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* CARD - The "White Box" */
+.dashboard-section {
+  width: 90%; /* Better for mobile responsiveness */
+  max-width: 400px;
+  min-height: auto;
+  max-height: min-content;
+  background-color: #a9927d;
+  padding: 3rem 2rem; /* Increased vertical padding */
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  
+  /* THE FIX: Force vertical stacking */
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    /* Centers children horizontally */
+  justify-content: center;
+  text-align: center;
+  
+  /* margin: auto;  */
+  /* Works perfectly inside the .main-section flex container */
+  box-sizing: border-box;
+}
+
+/* Button Row - Ensure they stack or wrap nicely */
+.button-row {
+  display: flex;
+  flex-direction: column; /* Stacks buttons vertically like the image */
+  gap: 1rem;
+  width: 100%;
+  max-width: 250px; /* Limits button width so they aren't huge */
+  margin-top: 1.5rem;
+}
+
+/* Ensure headings don't have weird margins */
+.dashboard-section h2, 
+.dashboard-section p {
+  margin: 0.5rem 0;
+}
+/* HEADER */
+.dashboard-header {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.dashboard-header h1 {
+  color: white;
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: white;
+  color: #5e503f;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  color: rgb(228, 4, 4);
+  transform: translateY(-2px);
+}
+
+/* MAIN AREA — THIS IS THE KEY FIX */
+.main-section {
+  flex: 1; /* takes remaining height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.dashboard-section {
+  width: 100%;
+  max-width: 520px;
+  background-color: #64313b;
+  padding: 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+  margin: 0 auto; /* HARD CENTERING FIX */
+  box-sizing: border-box;
+}
+
+/* Headings */
+h2 {
+  margin-bottom: 1rem;
+  color: white;
+}
+p{
+  color: white;
+}
+
+/* Button Row */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+}
+
+/* Bigger Buttons */
+button {
+  padding: 1rem 2.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #a9927d;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #6a5745;
+  transform: translateY(-3px);
+}

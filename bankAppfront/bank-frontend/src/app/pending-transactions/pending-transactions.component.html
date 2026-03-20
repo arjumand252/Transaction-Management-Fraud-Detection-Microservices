@@ -1,0 +1,37 @@
+<div class="page-wrapper">
+
+<div class="manager-container">
+  <h2>Pending Transactions</h2>
+  <div class = "search-section">
+  <label>
+    Manager ID:
+    <input type="number" [(ngModel)]="mgrId" placeholder="Enter Manager ID" required>
+  </label>
+  <button (click)="getPendingTransactions()">Fetch Pending Transactions</button>
+  </div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="pendingTx.length > 0" class="transactions-table">
+    <thead>
+      <tr>
+        <!-- <th>Transaction ID</th> -->
+        <th>Account ID</th>
+        <!-- <th>Type</th> -->
+        <th>Amount</th>
+        <th>Status</th>
+        <!-- <th>Clerk ID</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tx of pendingTx">
+        <!-- <td>{{ tx.id }}</td> -->
+        <td>{{ tx.accountId }}</td>
+        <!-- <td>{{ tx.type }}</td> -->
+        <td>{{ tx.amount }}</td>
+        <td>{{ tx.status }}</td>
+        <!-- <td>{{ tx.clerkId }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

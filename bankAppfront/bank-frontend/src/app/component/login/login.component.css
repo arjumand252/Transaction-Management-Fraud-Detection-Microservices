@@ -1,0 +1,103 @@
+/* Full page container */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+    background: linear-gradient(175deg, #0a0908, #49111c);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+header h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+/* Login box */
+.login-box {
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 320px;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.login-box p {
+  margin-bottom: 1.5rem;
+  color: #5e503f;
+  font-size: 0.95rem;
+}
+
+/* Form labels & inputs */
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  text-align: left;
+  color: #333;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #6c63ff;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 0.7rem 0;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #5e503f;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #6a5745;
+}
+
+/* Validation & error messages */
+.validation-error {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: #d93025;
+  font-weight: 500;
+}

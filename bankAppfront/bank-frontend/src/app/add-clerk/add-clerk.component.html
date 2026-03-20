@@ -1,0 +1,95 @@
+<!-- <div class="container">
+
+  <h2>Clerk Management</h2>
+
+  <hr>
+
+  <h3>Create New Clerk</h3>
+
+  <form #clerkForm="ngForm"
+        (ngSubmit)="submit(clerkForm)"
+        class="account-form">
+
+    <div class="form-row-wrapper">
+
+      <div class="form-row">
+        <label>Clerk Name</label>
+        <input type="text"
+               [(ngModel)]="clerkName"
+               name="clerkName"
+               required
+               minlength="3"
+               #clerkNameField="ngModel" />
+
+        <div class="validation-error"
+             *ngIf="clerkNameField.invalid && clerkNameField.touched">
+          Clerk name must be at least 3 characters.
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Manager ID</label>
+        <input type="number"
+               [(ngModel)]="managerId"
+               name="managerId"
+               required
+               min="1"
+               #managerIdField="ngModel" />
+
+        <div class="validation-error"
+             *ngIf="managerIdField.invalid && managerIdField.touched">
+          Manager ID must be greater than 0.
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Password</label>
+        <input type="password"
+               [(ngModel)]="password"
+               name="password"
+               required
+               minlength="4"
+               #passwordField="ngModel" />
+
+        <div class="validation-error"
+             *ngIf="passwordField.invalid && passwordField.touched">
+          Password must be at least 4 characters.
+        </div>
+      </div>
+
+    </div>
+
+    <button type="submit" [disabled]="clerkForm.invalid">
+      Add Clerk
+    </button>
+
+  </form>
+
+</div> -->
+
+<div class="page-wrapper">
+  <div class="clerk-card">
+    <h2>Clerk Management</h2>
+    <hr>
+    <h3>Create New Clerk</h3>
+
+    <form #clerkForm="ngForm" (ngSubmit)="submit(clerkForm)" class="clerk-form">
+      <div class="input-group">
+        <label>Clerk Name</label>
+        <input type="text" [(ngModel)]="clerkName" name="clerkName" required placeholder="Enter name...">
+      </div>
+
+      <div class="input-group">
+        <label>Manager ID</label>
+        <input type="number" [(ngModel)]="managerId" name="managerId" required placeholder="Enter ID...">
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" name="password" required placeholder="" autocomplete="off">
+      </div>
+
+      <button type="submit" [disabled]="clerkForm.invalid">Add Clerk</button>
+    </form>
+  </div>
+</div>

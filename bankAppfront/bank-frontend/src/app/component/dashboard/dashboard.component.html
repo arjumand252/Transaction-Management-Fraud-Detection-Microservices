@@ -1,0 +1,23 @@
+<div class="dashboard-container">
+
+  <!-- HEADER -->
+  <header class="dashboard-header">
+    <h1>BankApp Dashboard</h1>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </header>
+
+  <!-- MAIN SECTION -->
+  <section class="dashboard-section main-section">
+    <h2>Welcome!</h2>
+    <p>Select an action below:</p>
+
+    <div class="button-row">
+      <button routerLink="/accounts">Accounts</button>
+      <button routerLink="/transactions">Transactions</button>
+      <button routerLink="/add-clerk">Add Clerk</button>
+      <button routerLink="/view-clerks">View All Clerks</button>
+      <button routerLink="/pending-transactions">Pending Transactions</button>
+    </div>
+  </section>
+
+</div>

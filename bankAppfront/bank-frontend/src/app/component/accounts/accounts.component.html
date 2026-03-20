@@ -1,0 +1,143 @@
+<h2 style="margin-bottom:20px;">Account Management</h2>
+
+<div class = "flex-container">
+  <div class = "createAccount">
+    <h3>Create New Account</h3>
+
+    <form #accountForm="ngForm" (ngSubmit)="createAccount(accountForm)" class="account-form">
+
+      <div class="form-row-wrapper">
+
+        <!-- Name -->
+        <div class="form-row">
+          <label for="name">Account Holder Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter account holder name"
+            [(ngModel)]="newAccount.name"
+            name="name"
+            required
+            #nameField="ngModel"
+          />
+          <div class="validation-error" *ngIf="nameField.invalid && nameField.touched">
+            Name is required.
+          </div>
+        </div>
+
+        <!-- Balance -->
+        <div class="form-row">
+          <label for="balance">Balance</label>
+          <input
+            type="number"
+            id="balance"
+            placeholder="Enter initial balance"
+            [(ngModel)]="newAccount.balance"
+            name="balance"
+            required
+            min="1"
+            #balanceField="ngModel"
+          />
+          <div class="validation-error" *ngIf="balanceField.invalid && balanceField.touched">
+            Balance must be greater than 0.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Phone -->
+      <div class="form-row">
+        <label for="phone">Phone Number</label>
+        <input
+          type="text"
+          id="phone"
+          placeholder="Enter phone number"
+          [(ngModel)]="newAccount.phone"
+          name="phone"
+          required
+          #phoneField="ngModel"
+        />
+        <div class="validation-error" *ngIf="phoneField.invalid && phoneField.touched">
+          Phone number is required.
+        </div>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="form-row">
+        <label for="date">Date of Birth</label>
+        <input
+          type="date"
+          id="date"
+          [(ngModel)]="newAccount.date"
+          name="date"
+          required
+          #dateField="ngModel"
+        />
+        <div class="validation-error" *ngIf="dateField.invalid && dateField.touched">
+          Date of Birth is required.
+        </div>
+      </div>
+
+      <!-- Nationality -->
+      <div class="form-row">
+        <label for="nationality">Nationality</label>
+        <input
+          type="text"
+          id="nationality"
+          placeholder="Enter nationality"
+          [(ngModel)]="newAccount.nationality"
+          name="nationality"
+          required
+          #nationalityField="ngModel"
+        />
+        <div class="validation-error" *ngIf="nationalityField.invalid && nationalityField.touched">
+          Nationality is required.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="accountForm.invalid">
+        Create Account
+      </button>
+    </form>
+  </div>
+
+  <div class = "SearchAccount">
+  <h3>All Accounts</h3>
+
+  <div style="margin-bottom: 10px;">
+    <input 
+      type="text" 
+      placeholder="Search by name or ID..." 
+      [(ngModel)]="searchTerm"
+      style="padding: 8px; width: 100%; max-width: 300px;"
+    />
+  </div>
+
+  <table border="1" cellpadding="8" style="margin-top:15px; border-collapse: collapse;">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Balance</th>
+      <th>Phone</th>
+      <th>DOB</th>
+      <th>Nationality</th>
+      <th>Action</th>
+    </tr>
+
+    <tr *ngFor="let acc of filteredAccounts">
+      <td>{{acc.id}}</td>
+      <td>{{acc.name}}</td>
+      <td>{{acc.balance}}</td>
+      <td>{{acc.phone}}</td>
+      <td>{{acc.date}}</td>
+      <td>{{acc.nationality}}</td>
+      <td>
+        <button (click)="deleteAccount(acc.id)">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <p *ngIf="filteredAccounts.length === 0">No accounts found.</p>
+  </div>
+  
+</div>

@@ -1,0 +1,252 @@
+<div class="page-wrapper">
+  <div class="transactions-container">
+    <div class="transactionOptions">
+      <h2>Transactions</h2>
+      <p>Select an operation below:</p>
+
+      <!-- Operation selection -->
+      <div class="operation-buttons">
+        <button (click)="selectOperation('deposit')">Deposit</button>
+        <button (click)="selectOperation('withdraw')">Withdraw</button>
+        <button (click)="selectOperation('transfer')">Transfer</button>
+      </div>
+
+      <!-- Deposit Form -->
+      <form
+        *ngIf="selectedOperation === 'deposit'"
+        (ngSubmit)="submitDeposit()"
+      >
+        <h3>Deposit Funds</h3>
+        <p>Enter the account ID, amount to deposit, and the clerk ID.</p>
+
+        <label>
+          Account ID:
+          <input
+            type="number"
+            placeholder="Enter account ID"
+            [(ngModel)]="depositWithdrawData.accountId"
+            name="depositAccountId"
+            required
+          />
+        </label>
+
+        <label>
+          Amount:
+          <input
+            type="number"
+            placeholder="Enter amount"
+            [(ngModel)]="depositWithdrawData.amount"
+            name="depositAmount"
+            required
+          />
+        </label>
+
+        <label>
+          Clerk ID:
+          <input
+            type="number"
+            placeholder="Enter clerk ID"
+            [(ngModel)]="depositWithdrawData.clerkId"
+            name="depositClerkId"
+            required
+          />
+        </label>
+
+        <button type="submit">Submit Deposit</button>
+      </form>
+
+      <!-- Withdraw Form -->
+      <form
+        *ngIf="selectedOperation === 'withdraw'"
+        (ngSubmit)="submitWithdraw()"
+      >
+        <h3>Withdraw Funds</h3>
+        <p>Enter the account ID, amount to withdraw, and the clerk ID.</p>
+
+        <label>
+          Account ID:
+          <input
+            type="number"
+            placeholder="Enter account ID"
+            [(ngModel)]="depositWithdrawData.accountId"
+            name="withdrawAccountId"
+            required
+          />
+        </label>
+
+        <label>
+          Amount:
+          <input
+            type="number"
+            placeholder="Enter amount"
+            [(ngModel)]="depositWithdrawData.amount"
+            name="withdrawAmount"
+            required
+          />
+        </label>
+
+        <label>
+          Clerk ID:
+          <input
+            type="number"
+            placeholder="Enter clerk ID"
+            [(ngModel)]="depositWithdrawData.clerkId"
+            name="withdrawClerkId"
+            required
+          />
+        </label>
+
+        <button type="submit">Submit Withdraw</button>
+      </form>
+
+      <!-- Transfer Form -->
+      <form
+        *ngIf="selectedOperation === 'transfer'"
+        (ngSubmit)="submitTransfer()"
+      >
+        <h3>Transfer Funds</h3>
+        <p>
+          Enter source and destination account IDs, amount, and clerk ID
+          handling the transfer.
+        </p>
+
+        <label>
+          From Account ID:
+          <input
+            type="number"
+            placeholder="Enter source account ID"
+            [(ngModel)]="transferData.fromAccId"
+            name="fromAccId"
+            required
+          />
+        </label>
+
+        <label>
+          To Account ID:
+          <input
+            type="number"
+            placeholder="Enter destination account ID"
+            [(ngModel)]="transferData.toAccId"
+            name="toAccId"
+            required
+          />
+        </label>
+
+        <label>
+          Amount:
+          <input
+            type="number"
+            placeholder="Enter amount"
+            [(ngModel)]="transferData.amount"
+            name="transferAmount"
+            required
+          />
+        </label>
+
+        <label>
+          Clerk ID:
+          <input
+            type="number"
+            placeholder="Enter clerk ID"
+            [(ngModel)]="transferData.clerkId"
+            name="transferClerkId"
+            required
+          />
+        </label>
+
+        <button type="submit">Submit Transfer</button>
+      </form>
+
+      <!-- Result / Error -->
+      <!-- <div *ngIf="result" class="result">
+    <h4>Transaction Successful:</h4>
+    <pre>{{ result | json }}</pre>
+  </div> -->
+
+      <div *ngIf="result" class="success-receipt">
+        <div class="receipt-header">
+          <div class="check-icon">✓</div>
+          <h4>Transaction Successful</h4>
+        </div>
+
+        <div class="receipt-body">
+          <div class="receipt-row">
+            <span>Transaction ID</span>
+            <strong>#{{ result.transactionId }}</strong>
+          </div>
+          <div class="receipt-row">
+            <span>Type</span>
+            <span class="badge">{{ result.transactionType }}</span>
+          </div>
+          <div class="receipt-row">
+            <span>Amount</span>
+            <!-- <strong class="amount-text">{{ result.amount | currency:'INR' }}</strong> -->
+            <strong class="amount-text">₹{{ result.amount }}</strong>
+          </div>
+          <div class="receipt-row">
+            <span>Date</span>
+            <span>{{ result.date | date: "medium" }}</span>
+          </div>
+          <div class="receipt-row">
+            <span>Status</span>
+            <span class="status-approved">{{ result.status }}</span>
+          </div>
+          <hr />
+          <div class="receipt-footer">
+            <p>
+              Account ID: {{ result.accountId }} | Clerk ID:
+              {{ result.clerkId }}
+            </p>
+          </div>
+        </div>
+
+        <button class="btn-secondary" (click)="result = null">Done</button>
+      </div>
+
+      <div *ngIf="error" class="error">
+        <h4>Error:</h4>
+        <p>{{ error }}</p>
+      </div>
+    </div>
+    <!-- ======================= -->
+    <!-- 🔎 SEARCH TRANSACTIONS -->
+    <!-- ======================= -->
+
+    <hr class="divider" />
+
+    <div class="search-section">
+      <h3>Search Transactions by Account ID</h3>
+
+      <div class="search-box">
+        <input
+          type="number"
+          placeholder="Enter account ID"
+          [(ngModel)]="searchAccId"
+          name="searchAccId"
+        />
+
+        <button (click)="fetchTransactions()">Search</button>
+      </div>
+
+    <!-- Transaction List Result -->
+    <!-- Transaction Result Section -->
+    <div *ngIf="hasSearched" class="history-section">
+      <!-- Error / Empty State -->
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Transaction List -->
+      <div *ngIf="transactionHistory.length">
+        <h3>Transaction History</h3>
+
+        <div class="history-card" *ngFor="let tx of transactionHistory">
+          <div><strong>ID:</strong> {{ tx.transactionId }}</div>
+          <div><strong>Type:</strong> {{ tx.transactionType }}</div>
+          <div><strong>Amount:</strong> ₹{{ tx.amount }}</div>
+          <div><strong>Date:</strong> {{ tx.date | date: "medium" }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
