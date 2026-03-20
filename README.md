@@ -160,6 +160,7 @@ spring.kafka.bootstrap-servers=localhost:9092
 ```bash
 mvn spring-boot:run
 ```
+The BankApp and Fraud microservices need to be run separately.
 
 ### 5. Run the Angular frontend
 
@@ -266,10 +267,11 @@ Returns proper HTTP status codes:
 A typical transaction monitoring flow looks like this:
 
 1. A transaction is created through the Angular frontend
-2. The Spring Boot backend processes and stores the transaction
+2. The BankApp microservice processes and stores the transaction
 3. A transaction event is published to Kafka
-4. Kafka Streams consumes and analyzes the event stream
-5. Suspicious patterns are flagged for anomaly or fraud detection
+4. Kafka Streams consumes the event stream
+5. The transaction event is processed by the Fraud Detection microservice 
+6. Suspicious patterns are flagged for anomaly or fraud detection
 
 This demonstrates real-time streaming and event-driven backend design.
 
@@ -277,7 +279,6 @@ This demonstrates real-time streaming and event-driven backend design.
 
 ## Future Enhancements
 
-- Split modules into dedicated microservices
 - Add notification/alert service for suspicious transactions
 - Introduce dashboards for transaction analytics
 - Add Docker-based deployment
